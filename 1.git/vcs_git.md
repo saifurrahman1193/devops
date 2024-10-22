@@ -13,6 +13,26 @@
 ```
 git config
 git config -l
-git config user.name "saifurrahman1193"
-git config user.email "saifur.rahman1193@gmail.com"
+git config --global user.name "saifurrahman1193"
+git config --global user.email "saifur.rahman1193@gmail.com"
+```
+
+#### Basic commands
+```
+git init
+ls 
+ls -a
+touch file.txt
+
+```
+
+- add (means to track the file)
+
+```
+git init
+git add .
+git commit -m "first commit"
+git status
+git branch
+git checkout branch
 ```
