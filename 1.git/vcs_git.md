@@ -96,6 +96,26 @@ Amending a Commit: You can modify the last commit with git commit --amend (usefu
 
 ### checkout
 
+- Switch Branches: Changes the current branch to another existing branch.
+  ```
+    git checkout <branch-name>
+  ```
+- Create and Switch to a New Branch:
+    ```
+    git checkout -b <new-branch-name>
+    ```
+
+- Restore Files: Replaces changes in the working directory with the version from the last commit, or from a specified commit.
+    ```
+    git checkout <file-name>
+    ```
+
+    This will discard any uncommitted changes in that file.
+
+- Detached HEAD State:
+
+    If you checkout a specific commit (not a branch), Git enters a "detached HEAD" state, where HEAD points directly to that commit. Changes made in this state won't be associated with any branch unless a new branch is created
+
 ### head
 - Tracks the Current Position: HEAD points to the most recent commit in your current branch.
 - has an address
