@@ -48,7 +48,7 @@ git checkout branch
   - This command creates a .git folder where Git stores version history.
 
 
-### .git filder
+### .git folder
   - containing all information, history, and settings for managing and tracking changes to your files
   - It's like a DB
   - Key Contents
@@ -90,9 +90,30 @@ git commit -m "commit message"
 Amending a Commit: You can modify the last commit with git commit --amend (useful for updating messages or adding files).
 
 
+#### GIT commit types
+```
+feat: New feature for the user.
+fix: Bug fix.
+style: Code Style Changes.
+refactor: Code Refactoring.
+build: Build System Changes.
+ci: Continuous Integration Changes.
+perf: Performance Improvements.
+revert: Revert a Previous Commit.
+docs: Documentation changes.
+test: Adding or modifying tests.
+chore: Routine tasks, maintenance, or housekeeping.
+```
+
+
+
 ### Branch
 - Branches allow isolated work on features, fixes, or experiments.
 - tree root
+```
+git branch
+
+```
 
 ### checkout
 
