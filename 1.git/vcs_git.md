@@ -322,5 +322,56 @@ git log
 
 ### amend
 ```
+git add .
 git commit --amend
+git push --force
+```
+
+
+
+
+### git rebase
+
+#### Interactive Rebase for History Rewriting
+
+##### Interactive rebase allows you to modify, combine, or reorder commits.
+
+
+This opens an editor to rewrite the last 3 commits, where you can:
+
+- Pick: Keep the commit as is.
+- Reword: Edit the commit message.
+- Squash: Combine commits.
+- Drop: Delete a commit.
+
+##### Reword
+```
+git rebase -i HEAD~3
+git rebase --edit-todo
+reword 17b1009 Add instruction class details on devops architecture changes rweord
+ctrl x
+y
+enter
+git rebase --continue
+```
+### git reset
+
+1. --soft: Undo the commit, keep changes staged.
+2. --mixed: (default) Undo the commit, unstage changes, keep them in the working directory.
+3. --hard: Undo the commit and delete all changes.
+
+
+```
+git reset --soft <commit>
+git reset --soft HEAD~1
+```
+
+```
+git reset --mixed <commit>
+git reset --mixed HEAD~1
+```
+
+```
+git reset --hard <commit>
+git reset --hard HEAD~1
 ```
