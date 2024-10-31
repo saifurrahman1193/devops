@@ -86,6 +86,7 @@ Key Command:
 
 ```
 git commit -m "commit message"
+git commit -m "commit message" -m "commit message details"
 ```
 Amending a Commit: You can modify the last commit with git commit --amend (useful for updating messages or adding files).
 
@@ -279,10 +280,47 @@ git fetch
 ```
 git remote -v
 
+origin  https://saifurrahman1193@github.com/saifurrahman1193/devops.git (fetch)
+origin  https://saifurrahman1193@github.com/saifurrahman1193/devops.git (push)
+
+
 ```
+
 - v = verbose
+
+
+```
+git remote add test https://github.com/saifurrahman1193/microservice-rabbitmq.git
+git remote -v
+git remote remove test
+```
 
 #### to add known hosts
 ```
 ssh -T git@github.com
+```
+
+
+### Upstream
+
+-  It’s often used when working with remotes and branch tracking
+-  
+```
+git branch --set-upstream-to=<remote>/<branch>
+```
+
+### Downstream
+
+
+![Alt text](upstream_downstream.png "Upstream - Downstream")
+
+
+### log
+```
+git log
+```
+
+### amend
+```
+git commit --amend
 ```
