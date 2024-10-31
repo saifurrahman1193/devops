@@ -107,6 +107,47 @@ chore: Routine tasks, maintenance, or housekeeping.
 ```
 
 
+```
+<type>(<scope>): <short description>
+
+[optional body]
+
+[optional footer]
+```
+
+```
+git commit -m "<type> (<scope>): <short description>" -m "<commit details>" -m "<footer note>"
+```
+
+#### Types:
+- feat: A new feature.
+- fix: A bug fix.
+- chore: Changes to the build process or auxiliary tools and libraries.
+- docs: Documentation changes.
+- style: Code style changes (white-space, formatting, etc.).
+- refactor: Code refactoring without adding features or fixing bugs.
+- perf: Performance improvements.
+- test: Adding or updating tests.
+
+
+#### Scope (optional): This specifies what part of the codebase the change affects, e.g., auth, api, or database.
+
+#### Examples:
+```
+feat(auth): add login endpoint
+fix(api): handle null values in response
+docs(readme): update contributing guidelines
+refactor(database): optimize query performance
+
+Fix typo in user profile page
+Add error handling to signup form
+Optimize image loading on the homepage
+
+✨ feat: add new dashboard component
+🐛 fix: resolve layout bug in header
+📝 docs: update API usage instructions
+```
+
 
 ### Branch
 - Branches allow isolated work on features, fixes, or experiments.
@@ -312,7 +353,7 @@ git branch --set-upstream-to=<remote>/<branch>
 ### Downstream
 
 
-![Alt text](upstream_downstream.png "Upstream - Downstream")
+![Alt text](assets/upstream_downstream.png "Upstream - Downstream")
 
 
 ### log
@@ -322,5 +363,170 @@ git log
 
 ### amend
 ```
+git add .
 git commit --amend
+git push --force
 ```
+
+
+
+
+### git rebase
+
+- used to merge branches
+- “moving the base of a branch onto a different position”. Think of it like a redo — “I meant to start here.” 
+
+![Alt text](assets/Git%20Rebase%20vs.%20Merge%20Secrets.png "Git%20Rebase%20vs.%20Merge%20Secrets")
+![Alt text](assets/Git%20Rebase.png "Git%20Rebase")
+![Alt text](assets/Branching-in-git.png "Branching-in-git")
+
+![Alt text](assets/Rebasing-in-git.png "Rebasing-in-git")
+- to maintain a progressively straight and cleaner project history
+- gives rise to a perfectly linear project history
+- To integrate the feature branch into the main branch in two ways. 
+  1. merging directly into a main branch
+  2.  or first rebasing and then merging
+
+![Alt text](assets/git-rebase-useage.png "git-rebase-useage")
+
+#### Interactive Rebase for History Rewriting
+
+##### Interactive rebase allows you to modify, combine, or reorder commits.
+
+
+This opens an editor to rewrite the last 3 commits, where you can:
+
+- Pick: Keep the commit as is.
+- Reword: Edit the commit message.
+- Squash: Combine commits.
+- Drop: Delete a commit.
+
+##### Reword
+```
+git rebase -i HEAD~3
+git rebase --edit-todo
+reword 17b1009 Add instruction class details on devops architecture changes rweord
+ctrl x
+y
+enter
+git rebase --continue
+```
+
+```
+git add .
+git rebase --continue
+git push --force origin feature-branch
+```
+
+If you want to skip a conflicting commit:
+```
+git rebase --skip
+```
+
+If you need to abort the rebase and return to the original branch state:
+```
+git rebase --abort
+```
+
+
+#### common use cases
+
+- **Keeping a clean and linear commit history:** Git rebasing is mainly used for maintaining a linear history of commits, where commits are interrelated to the co-existing one. it makes it easy to understand code.
+- **Updating a feature branch:** By rebasing the feature branch will help us to maintain updates because it is generated from the main branch. The main branch will always be up to date.
+- Rebasing the feature branch can bring it up to date with the most recent changes in the main branch if it was generated from a main branch (such as master) and the main branch has since been updated with new commits.
+- **Resolving merge conflicts:** Git rebase will help us to resolve merge conflicts. It enables conflicts to be settled at each stage, leading to a cleaner merge, by applying each commit from the branch being rebased separately.
+
+
+
+#### git rebase master : analysis 1
+1. Move your current branch's commits to the top of the master branch.
+2. Reapply each commit from your current branch on top of the latest commits in master.
+
+This essentially brings your branch up to date with master without creating a merge commit, 
+
+
+#### git rebase master : analysis 2
+**Here's a breakdown of what it does:**
+
+- Finds the common ancestor: Git identifies the common ancestor between your current branch and the master branch.
+- Replays commits: It takes each commit from your branch, one by one, and applies it to the latest commit of the master branch.
+- Resolves conflicts: If there are any conflicts during the replay process, you'll need to resolve them manually.
+- Creates new commits: Once all commits are replayed and conflicts are resolved, Git creates new commits on top of the master branch.
+
+**Why use git rebase master?**
+
+- Cleaner commit history: It can help create a more linear and easier-to-understand commit history.
+- Avoids merge commits: By replaying commits, you can avoid creating unnecessary merge commits.
+- Updates your branch: It brings your branch up-to-date with the latest changes from the master branch.
+
+
+
+#### Bringing a Feature Branch Up-to-Date : Scenario : master to feature branch up-to-date
+
+If your feature-branch is based on master and master has received new commits since you started, rebasing allows you to incorporate those updates cleanly:
+```
+git checkout feature-branch
+git rebase master
+```
+
+
+
+### git reset
+
+1. --soft: Undo the commit, keep changes staged.
+2. --mixed: (default) Undo the commit, unstage changes, keep them in the working directory.
+3. --hard: Undo the commit and delete all changes.
+
+
+```
+git reset --soft <commit>
+git reset --soft HEAD~1
+```
+
+```
+git reset --mixed <commit>
+git reset --mixed HEAD~1
+```
+
+```
+git reset --hard <commit>
+git reset --hard HEAD~1
+```
+
+
+### git push
+- To push your changes to a remote Git repository
+  
+```
+# git push <remote-url> <branch-name>
+git push origin master
+git push origin master
+```
+
+#### Push to a specific remote URL (if you haven’t set it as origin):
+
+```
+git push https://github.com/username/repository.git main
+```
+
+#### Push to a different remote name (e.g., if you’ve added a remote named upstream):
+```
+git push upstream main
+```
+
+#### Force Pushes and Safety Options
+- Force push (use with caution as it can overwrite history):
+
+```
+git push --force origin main
+```
+
+#### Setting Upstream Branch
+- Set an upstream branch while pushing (useful for the first push of a new branch):
+
+```
+git push -u origin new-branch
+```
+
+### git reflog
+### git forking
