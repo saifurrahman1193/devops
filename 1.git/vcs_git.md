@@ -313,6 +313,7 @@ git branch --set-upstream-to=<remote>/<branch>
 
 
 ![Alt text](upstream_downstream.png "Upstream - Downstream")
+<<<<<<< HEAD
 
 
 ### log
@@ -324,3 +325,5 @@ git log
 ```
 git commit --amend
 ```
+=======
+>>>>>>> 6482189... Add instruction class details on devops architecture
