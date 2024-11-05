@@ -11,6 +11,25 @@
 - server where can i store code
 
 ### Git Setup & Configuration
+
+#### How to setup git
+
+```
+git branch -m master
+git config --global user.name "saifurrahman1193"
+git config --global user.email "saifur.rahman1193@gmail.com"
+
+# generate ssh key. ssh key has 1 private key and 1 public key
+ssh-keygen
+
+# setup ssh key in your github account
+
+# test authentication
+ssh -T git@github.com
+```
+
+
+
 #### Username and email setup
 
 ```
@@ -212,6 +231,9 @@ Usage: Customize your workflow with aliases for frequently used commands.
 Configuration: Set globally with ```git config --global alias.<name> "<command>".```
 
 
+### git ssh
+- Using SSH with Git allows you to securely connect to remote repositories without entering your username and password each time.
+- 
 
 ### Git Remote
 
@@ -303,11 +325,17 @@ ssh -T git@github.com
 
 ### Upstream
 
--  It’s often used when working with remotes and branch tracking
--  
-```
-git branch --set-upstream-to=<remote>/<branch>
-```
+What is Upstream?
+
+- git fetch 2 ways
+  - Upstream Branch: 
+    - branch focused
+    - The branch that your current branch is tracking for updates. When you pull changes, they usually come from the upstream branch.
+  - Upstream Repository: 
+    - repository focused
+    - forked based
+    - multiple repository based
+    - The main or original repository from which your repository was forked, often used in open-source projects.
 
 ### Downstream
 
@@ -315,7 +343,14 @@ git branch --set-upstream-to=<remote>/<branch>
 ![Alt text](upstream_downstream.png "Upstream - Downstream")
 
 
-### log
+
+| Term       | Meaning                                                                        |
+| ---------- | ------------------------------------------------------------------------------ |
+| Upstream   | The main source branch or repository from which changes are pulled or fetched. |
+| Downstream | The target branch or repository where changes are pushed or applied.           |
+
+
+### log 
 ```
 git log
 ```
