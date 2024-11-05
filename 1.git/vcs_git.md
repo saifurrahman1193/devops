@@ -376,7 +376,6 @@ git push --force
 - used to merge branches
 - “moving the base of a branch onto a different position”. Think of it like a redo — “I meant to start here.” 
 
-![Alt text](assets/Git%20Rebase%20vs.%20Merge%20Secrets.png "Git%20Rebase%20vs.%20Merge%20Secrets")
 ![Alt text](assets/Git%20Rebase.png "Git%20Rebase")
 ![Alt text](assets/Branching-in-git.png "Branching-in-git")
 
@@ -454,7 +453,7 @@ This essentially brings your branch up to date with master without creating a me
 - Creates new commits: Once all commits are replayed and conflicts are resolved, Git creates new commits on top of the master branch.
 
 **Why use git rebase master?**
-
+- master branch to feature branch merge 
 - Cleaner commit history: It can help create a more linear and easier-to-understand commit history.
 - Avoids merge commits: By replaying commits, you can avoid creating unnecessary merge commits.
 - Updates your branch: It brings your branch up-to-date with the latest changes from the master branch.
@@ -468,6 +467,21 @@ If your feature-branch is based on master and master has received new commits si
 git checkout feature-branch
 git rebase master
 ```
+
+
+**git rebase feature-branch?**
+- moves all changes history/log from feature-branch to master branch
+- merge feature-branch to master branch
+
+```
+git checkout master
+git rebase feature-branch
+```
+
+![Alt text](assets/before-rebase.svg "before-rebase")
+![Alt text](assets/after-rebase.svg "after-rebase")
+![Alt text](assets/Git%20Rebase%20vs.%20Merge%20Secrets.png "Git%20Rebase%20vs.%20Merge%20Secrets")
+
 
 
 
@@ -529,8 +543,89 @@ git push -u origin new-branch
 ```
 
 ### git reflog
+
+
 ### git forking
 
 
+- Forking: Creating a personal copy of another user’s repository on your account.
+- Clone: Downloading your fork to your local machine.
+- Branch: Separate version of your code for making changes.
+- Commit: Saving changes with a descriptive message.
+- Push: Uploading your branch with changes to your fork on GitHub.
+- Pull Request (PR): Request for your changes to be reviewed and merged into the original repo.
+- Upstream: The original repository from which you forked.
+- Syncing Fork: Updating your fork with changes from the upstream repository.
 
-change 1
+
+
+#### Why Fork a Repository?
+Forking is useful when:
+- You want to contribute to an open-source project but need a personal space to work on changes.
+- You need to experiment with code or configurations without impacting the original codebase.
+- You want to keep a copy of a repository in your account for personal use or modification.
+
+Steps to Fork a Repository
+1. Navigate to the Original Repository: Go to the repository you want to fork on GitHub (or another hosting platform).
+2. Click the “Fork” Button: Usually, you’ll find a “Fork” button at the top-right corner of the repository page. Click it to create a copy of the repository under your account.
+3. Clone the Forked Repository:
+   1. After forking, go to your forked repository (now under your account) and click the “Code” button. Copy the URL and clone it locally using Git:
+        ```
+        git clone <your-fork-url>
+        ```
+4. Create a Branch:
+   1. Creating a new branch to make changes is a good practice, especially if you plan to submit a pull request.
+        ```
+        git checkout -b <your-branch-name>
+        ```
+5. Make Changes and Commit:
+   1. Edit files as needed, and then stage and commit your changes:
+        ```
+        git add .
+        git commit -m "Describe your changes"
+        ```
+6. Push Changes to Your Fork:
+   1. Push your branch to your forked repository on GitHub:
+      ```
+      git push origin <your-branch-name>
+      ```
+7. Create a Pull Request:
+   1. On your forked repository page, GitHub will often display an option to “Compare & pull request.”
+   2. Click this to open a pull request (PR) back to the original repository. This allows the project maintainers to review and potentially merge your changes.
+
+#### Keeping Your Fork Updated
+
+To ensure your fork stays up-to-date with the original repository, you should add the original repository as a remote and regularly fetch and merge changes:
+
+1. Add the Original Repository as a Remote:
+      ```
+      git remote add upstream <original-repo-url>
+      ```
+2. Fetch and Merge Changes:
+   1. Fetch changes from the upstream repository:
+      ```
+      git fetch upstream
+      ```
+   2. Merge changes from the upstream branch (often main or master) into your branch:
+      ```
+      git checkout main
+      git merge upstream/main
+      ```
+
+#### Summary
+```
+fork lazygit repo using panel
+git clone my_repo 
+# which is just forked/duplicated/created from original lazygit repo
+git remote -v
+git remote add jesse lazygit_original_repo
+git remote -v
+git remote add saifur my_repo
+git remote -v
+git checkout -b dev_saifur
+git push saifur dev_saifur
+git fetch jesse master
+git checkout master
+git rebase jesse/master
+
+```
