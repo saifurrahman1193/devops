@@ -629,3 +629,62 @@ git checkout master
 git rebase jesse/master
 
 ```
+
+
+### Merge Pull request
+
+Types
+1. Create a merge commit (Avoid)
+2. Squash and merge (Avoid)
+3. Rebase and merge (always do that)
+
+
+#### Create a merge commit (Avoid)
+
+```
+git merge feature-branch
+```
+
+Pros:
+
+    Preserves the entire commit history.
+    Makes it easy to trace back and understand how changes were merged.
+
+Cons:
+
+    The commit history can become cluttered if there are many small commits in the source branch.
+
+#### Squash and merge (Avoid)
+```
+git checkout main
+git merge --squash feature-branch
+git commit -m "Feature XYZ implementation"
+```
+Pros:
+
+    Simplifies commit history by consolidating changes into one commit.
+    Useful for cleaning up messy commit histories from feature branches.
+
+Cons:
+
+    Loses the detailed history of individual commits from the source branch.
+
+
+#### Rebase and merge (***********) (Always do that)
+```
+git checkout feature-branch
+git rebase main
+git rebase --continue
+git checkout main
+git merge feature-branch
+git rebase --continue
+```
+Pros:
+
+    Results in a clean, linear commit history.
+    Easier to follow the project history without merge commits.
+
+Cons:
+
+    Can rewrite commit history, making it harder to trace the original branch.
+    Not ideal if multiple developers are working on the same branch (could lead to conflicts).
