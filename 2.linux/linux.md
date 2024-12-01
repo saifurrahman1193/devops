@@ -3,6 +3,19 @@
 - [kernel](#kernel)
 - [wsl](#wsl)
 - [vm](#vm)
+- [Common Directories in Linux](#common-directories-in-linux)
+  - [`/` - Root Directory](#---root-directory)
+  - [`/home` - User Home Directories](#home---user-home-directories)
+  - [`/bin` - Essential User Binaries](#bin---essential-user-binaries)
+  - [`/sbin` - System Binaries](#sbin---system-binaries)
+  - [`/etc` - Configuration Files](#etc---configuration-files)
+  - [`/var` - Variable Files](#var---variable-files)
+  - [`/tmp` - Temporary Files](#tmp---temporary-files)
+  - [`/usr` - User Utilities and Applications](#usr---user-utilities-and-applications)
+  - [`/dev` - Device Files](#dev---device-files)
+  - [`/lib` - Libraries](#lib---libraries)
+  - [`/mnt` and `/media` - Mount Points](#mnt-and-media---mount-points)
+  - [`/proc` and `/sys` - System Information](#proc-and-sys---system-information)
 - [Commands](#commands)
   - [ls](#ls)
       - [Description: Lists files and directories in the current directory.](#description-lists-files-and-directories-in-the-current-directory)
@@ -31,6 +44,69 @@
 ![Alt text](assets/wsl.png "wsl")
 
 # vm
+
+# Common Directories in Linux
+
+## `/` - Root Directory
+- The top of the directory structure.
+- Contains all other directories.
+
+## `/home` - User Home Directories
+- Stores personal files for each user.
+- Example: `/home/username`.
+
+## `/bin` - Essential User Binaries
+- Contains essential commands like `ls`, `cp`, and `cat`.
+
+## `/sbin` - System Binaries
+- Commands for system administration, e.g., `ifconfig`, `reboot`.
+
+## `/etc` - Configuration Files
+- Contains system-wide configuration files, such as `/etc/fstab`.
+
+## `/var` - Variable Files
+- Stores log files, temporary files, and caches.
+- Example: `/var/log`.
+
+## `/tmp` - Temporary Files
+- Used for temporary storage; data is cleared on reboot.
+
+## `/usr` - User Utilities and Applications
+- Stores non-essential binaries, libraries, and documentation.
+
+## `/dev` - Device Files
+- Contains files representing hardware devices, e.g., `/dev/sda`.
+
+## `/lib` - Libraries
+- Shared libraries for system binaries and kernel modules.
+- 
+
+## `/mnt` and `/media` - Mount Points
+- Temporary mount points for external drives and media.
+
+## `/proc` and `/sys` - System Information
+- Virtual filesystems providing information about processes and hardware.
+
+
+| Directory | Description                                                      |
+| --------- | ---------------------------------------------------------------- |
+| `/`       | Root directory, the topmost level of the file system.            |
+| `/bin`    | Contains essential system binaries.                              |
+| `/boot`   | Contains boot loader files and kernel images.                    |
+| `/dev`    | Contains device files for hardware devices.                      |
+| `/etc`    | Contains configuration files for the system.                     |
+| `/home`   | Contains user home directories.                                  |
+| `/lib`    | Contains shared libraries.                                       |
+| `/mnt`    | Mount point for temporary file systems.                          |
+| `/opt`    | Contains optional software packages.                             |
+| `/root`   | Root user's home directory.                                      |
+| `/sbin`   | Contains system administrative binaries.                         |
+| `/tmp`    | Temporary files.                                                 |
+| `/usr`    | Contains user programs and data.                                 |
+| `/var`    | Contains variable data, such as logs, mail, and temporary files. |
+
+
+
 # Commands
 ## ls
 #### Description: Lists files and directories in the current directory.
@@ -71,6 +147,9 @@ cat files.txt | wc -w  # Counts the number of words in the files.txt file.
 
 ## whoami
 - print the username of the user currently logged into the system.
+```
+whoami
+```
 ## su
 - switch to another user account on the system.
 ```
@@ -98,7 +177,15 @@ cd directory_name
 | `cat file1.txt file2.txt file3.txt` | Concatenates and displays the contents of `file1.txt`, `file2.txt`, and `file3.txt` sequentially. |
 | `cat > input.txt`                   | Opens a text editor-like interface to input text, which is then saved to the file `input.txt`.    |
 
+
+```
+cd /
+cd etc
+cat os-release
+```
 ## pwd
+- current directory
+- 
 ```
 # Print the current working directory
 pwd
@@ -134,6 +221,13 @@ grep "keyword" *
 ```
 grep -i -n "error" log.txt
 grep -i -n 'error' 2.linux/linux.md
+```
+
+```
+cd /
+cd bin
+ls | grep mk  # list and search for 'mk'
+ls | grep mk | wc -l  # how many lines
 ```
 ## echo
 - print text to the terminal
@@ -182,6 +276,14 @@ command > filename.txt
 | `ls -la > file_list.txt`               | Lists files in long format and saves the output to `file_list.txt`.                          |
 | `grep 'error' log.txt > error_log.txt` | Searches for lines containing "error" in `log.txt` and saves the matches to `error_log.txt`. |
 
+```
+touch text.txt
+cat text.txt
+echo '1st line' > 'text.txt'
+echo 'replace 1st line' > 'text.txt'
+cat text.txt
+```
+
 ## >>
 
 | Command                                 | Explanation                                                                |
@@ -189,6 +291,16 @@ command > filename.txt
 | `date >> log.txt`                       | Appends the current date and time to the file `log.txt`.                   |
 | `grep 'error' log.txt >> error_log.txt` | Appends lines containing "error" from `log.txt` to `error_log.txt`.        |
 | `tail -f log.txt >> backup_log.txt`     | Continuously monitors `log.txt` and appends new lines to `backup_log.txt`. |
+
+```
+touch text.txt
+cat text.txt
+echo '1st line' > 'text.txt'
+echo '2nd line' >> 'text.txt'
+echo '3rd line' >> 'text.txt'
+cat text.txt
+```
+
 
 ## sed
 - a powerful stream editor that allows you to manipulate text in files
@@ -212,6 +324,17 @@ sed '/keyword/!d' filename.txt
 
 ```
 
+```
+touch text.txt
+cat text.txt
+echo 'line 1' > 'text.txt'
+echo 'line 2' >> 'text.txt'
+cat text.txt
+sed -i --help
+sed -i '2d' text.txt
+cat text.txt
+
+```
 ## mkdir
 
 | Command                      | Explanation                                                             |
@@ -238,5 +361,7 @@ sed '/keyword/!d' filename.txt
 | `sudo apt-get install package_name` | Installs the specified package.                           |
 | `sudo apt-get remove package_name`  | Removes the specified package.                            |
 | `sudo apt-get autoremove`           | Removes unused dependencies.                              |
+
+
 
 
